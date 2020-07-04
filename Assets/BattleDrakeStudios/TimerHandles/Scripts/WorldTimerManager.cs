@@ -7,7 +7,7 @@ namespace BattleDrakeStudios.TimerHandles {
     public class WorldTimerManager : MonoBehaviour {
         static public WorldTimerManager instance;
 
-        private Dictionary<FTimerHandle, FTimerData> activeTimers = new Dictionary<FTimerHandle, FTimerData>();
+        private Dictionary<TimerHandle, TimerData> activeTimers = new Dictionary<TimerHandle, TimerData>();
 
         private void Awake() {
             if (instance == null) {
@@ -24,7 +24,7 @@ namespace BattleDrakeStudios.TimerHandles {
                         timer.Value.timerDelegate?.Invoke();
 
                         if (!timer.Value.isLooping) {
-                            timer.Value.timerStatus = ETimerStatus.PendingRemoval;
+                            RemoveTimer(timer.Key);
                         } else {
                             timer.Value.expireTime = timer.Value.timerRate + Time.time;
                         }
@@ -35,21 +35,21 @@ namespace BattleDrakeStudios.TimerHandles {
             }
         }
 
-        private void RemoveTimer(FTimerHandle handle) {
+        private void RemoveTimer(TimerHandle handle) {
             activeTimers.Remove(handle);
             handle.IsActive = false;
         }
 
 
-        public void SetTimer(FTimerHandle handle, Action action, float timerRate, bool isLooping = false, float firstDelay = 0.0f) {
+        public void SetTimer(TimerHandle handle, Action action, float timerRate, bool isLooping = false, float firstDelay = 0.0f) {
             if (!handle.IsActive) {
                 handle.IsActive = true;
-                FTimerData newTimerData = new FTimerData(isLooping, ETimerStatus.Active, timerRate, Time.time + timerRate + firstDelay, action);
+                TimerData newTimerData = new TimerData(isLooping, ETimerStatus.Active, timerRate, Time.time + timerRate + firstDelay, action);
                 activeTimers.Add(handle, newTimerData);
             }
         }
 
-        public void StopTimer(FTimerHandle handle) {
+        public void StopTimer(TimerHandle handle) {
             if (handle.IsActive) {
                 if (activeTimers.ContainsKey(handle)) {
                     activeTimers[handle].timerStatus = ETimerStatus.PendingRemoval;
@@ -57,14 +57,14 @@ namespace BattleDrakeStudios.TimerHandles {
             }
         }
 
-        public void PauseTimer(FTimerHandle handle) {
+        public void PauseTimer(TimerHandle handle) {
             if (handle.IsActive) {
                 activeTimers[handle].timerStatus = ETimerStatus.Paused;
                 activeTimers[handle].expireTime -= Time.time;
             }
         }
 
-        public void UnPauseTimer(FTimerHandle handle) {
+        public void UnPauseTimer(TimerHandle handle) {
             if (handle.IsActive) {
                 activeTimers[handle].timerStatus = ETimerStatus.Active;
                 activeTimers[handle].expireTime += Time.time;

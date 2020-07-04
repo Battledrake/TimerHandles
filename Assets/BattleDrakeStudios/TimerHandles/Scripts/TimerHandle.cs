@@ -1,7 +1,6 @@
 ﻿
 namespace BattleDrakeStudios.TimerHandles {
-    public class FTimerHandle {
-
+    public class TimerHandle {
         public bool IsActive { get; set; }
     }
 }
