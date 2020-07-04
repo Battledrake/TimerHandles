@@ -4,7 +4,7 @@ As a programmer for both Unity and Unreal, I often find tools or libraries in on
 
 <br> After loading files into your project, create an object in your scene and attach the WorldTimerManager script to it. This script is responsible for the management of your timers.
 
-<br> In the script that you wish to have a timer, create a new variable of time TimeHandle. You must create it using the new keyword. You can do so when you define the variable, or before you intend to use the handle for the first time.
+<br> In the script that you wish to have a timer, create a new variable of type TimeHandle. You must create it using the new keyword. You can do so when you define the variable, or before you intend to use the handle for the first time. Ex: private TimerHandle delayHandle = new TimerHandle();
 
 <br> Create a float variable for the amount of time to pass before calling an action.
 
