@@ -1,4 +1,4 @@
-As a programmer for both Unity and Unreal, I often find tools or libraries in one engine that is not present in the other. One such library is Unreal Engine's TimerHandle. Unity has a few similar options, Coroutines and Invokes, but neither fit the bill like Unreal's does. This library isn't revolutionary, or anything super special, it is just another solution to creating timers in Unity in a way I liked from Unreal Engine.
+As a programmer for both Unity and Unreal, I often find tools or libraries in one engine that is not present in the other. One such library is Unreal Engine's TimerHandles. Unity certainly has its options for timers, but I've always liked Unreal's approach. This library isn't revolutionary, or anything super special, it is just another solution to creating timers in Unity in a way I liked from Unreal Engine.
 
 <br><b> How To Use: </b>
 
